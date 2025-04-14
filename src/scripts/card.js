@@ -1,6 +1,6 @@
 
 // Функция создания карточки
-function createCard (cardTemplate, cardName, cardLink, deleteCard, likeCard) {
+function createCard (cardTemplate, cardName, cardLink, deleteCard, likeCard, openImageModal) {
     const cardTemplateClone = cardTemplate.querySelector('.places__item ').cloneNode(true);
     const cardImage = cardTemplateClone.querySelector('.card__image');
     const cardTitle = cardTemplateClone.querySelector('.card__title');
@@ -13,9 +13,13 @@ function createCard (cardTemplate, cardName, cardLink, deleteCard, likeCard) {
 
     deleteButton.addEventListener('click', () => deleteCard(cardTemplateClone));
     likeButton.addEventListener('click', likeCard);
-
+    cardImage.addEventListener('click', () => {
+        openImageModal(cardLink, cardName);
+    });
+    
     return cardTemplateClone;
-}
+
+};
 //  Функция удаления карточки
 function deleteCard (card) {
     card.remove();

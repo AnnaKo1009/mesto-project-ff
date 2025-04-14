@@ -1,4 +1,4 @@
-function escClose(evt) {
+function closeEsc(evt) {
     if (evt.key === 'Escape') {
         const popup = document.querySelector('.popup_is-opened');
         closeModal(popup);
@@ -8,12 +8,12 @@ function escClose(evt) {
 function openModal(modal) {
     modal.classList.add('popup_is-animated');
     modal.classList.add('popup_is-opened'); 
-    document.addEventListener('keydown', escClose); 
+    document.addEventListener('keydown', closeEsc); 
 }
 
 function closeModal(modal) {
     modal.classList.remove('popup_is-opened');  
-    document.removeEventListener('keydown', escClose); 
+    document.removeEventListener('keydown', closeEsc); 
 }
 
 function addCloseListener(popupElement) {

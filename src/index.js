@@ -36,12 +36,14 @@ const profileDescription = document.querySelector('.profile__description');
 const editPlaceForm = document.forms['new-place'];
 const placeNameInput = document.querySelector('.popup__input_type_card-name');
 const placeLinkInput = document.querySelector('.popup__input_type_url');
+const imgElement = popupImage.querySelector('.popup__image');
+const imgCaption = popupImage.querySelector('.popup__caption');
 
 //  Вывести карточки на страницу
 initialCards.forEach(function (item) {
     const cardName =  item.name;
     const cardLink = item.link;
-    const cardItem = createCard(cardTemplate, cardName, cardLink, deleteCard, likeCard);
+    const cardItem = createCard(cardTemplate, cardName, cardLink, deleteCard, likeCard, openImageModal);
     placesList.append(cardItem);
  });
 
@@ -56,18 +58,14 @@ addCardButton.addEventListener('click', () => {
     openModal(popupNewCard);
   });
 
-placesList.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('card__image')) {
-        const card = evt.target.closest('.card');
-        const cardTitle = card.querySelector('.card__title').textContent;
-        const imgElement = popupImage.querySelector('.popup__image');
-        const imgCaption = popupImage.querySelector('.popup__caption');
-        imgElement.src = evt.target.src;
-        imgElement.alt = cardTitle; 
-        imgCaption.textContent = cardTitle; 
-        openModal(popupImage);
-    }
-});
+
+function openImageModal(link, name) {
+    imgElement.src = link;
+    imgElement.alt = name;
+    imgCaption.textContent = name;
+    
+    openModal(popupImage);
+}
 
 addCloseListener(popupEditProfile);
 addCloseListener(popupNewCard);
@@ -75,21 +73,21 @@ addCloseListener(popupImage);
 
 
 // редактирование информации о себе
-function handleFormSubmit(evt) {
+function handleProfileFormSubmit(evt) {
     evt.preventDefault();
     profileTitle.textContent = nameInput.value;
     profileDescription.textContent = jobInput.value;
     closeModal(popupEditProfile);
 };
 
-editProfileForm.addEventListener('submit', handleFormSubmit);
+editProfileForm.addEventListener('submit', handleProfileFormSubmit);
 
 // добавление информации о месте в форму
 function handleNewPlaceForm(evt) {
     evt.preventDefault();
     const cardName = placeNameInput.value;
     const cardLink = placeLinkInput.value;
-    const newCard = createCard(cardTemplate, cardName, cardLink, deleteCard, likeCard);
+    const newCard = createCard(cardTemplate, cardName, cardLink, deleteCard, likeCard, openImageModal);
     placesList.prepend(newCard);
     closeModal(popupNewCard);
     editPlaceForm.reset();
