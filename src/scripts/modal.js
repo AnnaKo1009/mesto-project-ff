@@ -6,7 +6,6 @@ function closeEsc(evt) {
 }
 
 function openModal(modal) {
-    modal.classList.add('popup_is-animated');
     modal.classList.add('popup_is-opened'); 
     document.addEventListener('keydown', closeEsc); 
 }
@@ -30,7 +29,7 @@ function addCloseListener(popupElement) {
     });
 }
 
-export { openModal, closeModal, addCloseListener};
+export {openModal, closeModal, addCloseListener};
 
 
 

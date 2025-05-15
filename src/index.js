@@ -115,6 +115,7 @@ function handleNewPlaceForm(evt) {
       const newCard = createCard(cardData, handleDeleteCard, likeCard, cardTemplate, openImageModal, userId);
       placesList.prepend(newCard);
       closeModal(popupNewCard);
+      editPlaceForm.reset();
     })
     .catch(err => {
       console.error('Ошибка при обновлении профиля:', err);
@@ -122,7 +123,6 @@ function handleNewPlaceForm(evt) {
     .finally(() => {
     submitButton.textContent = initialText;
     submitButton.disabled = false;
-    editPlaceForm.reset();
   })
 }
 
